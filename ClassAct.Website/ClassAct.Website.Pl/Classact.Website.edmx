@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClassActDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAddress">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" Nullable="false" />
+          <Property Name="StreetAddress" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCuisine">
+          <Key>
+            <PropertyRef Name="CuisineID" />
+          </Key>
+          <Property Name="CuisineID" Type="int" Nullable="false" />
+          <Property Name="CuisineDescription" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCuisineResturant">
+          <Key>
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="CuisineID" />
+          </Key>
+          <Property Name="ResturantID" Type="int" Nullable="false" />
+          <Property Name="CuisineID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblFeatures">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="int" Nullable="false" />
+          <Property Name="FeatureDescription" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMeal">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="CuisineID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="ResturantID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CuisineID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPerson">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="PersonsEmail" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PersonsUserName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PersonsPassword" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PersonFirstName" Type="varchar" MaxLength="255" />
+          <Property Name="PersonLastName" Type="varchar" MaxLength="255" />
+          <Property Name="PersonDOB" Type="date" />
+          <Property Name="PersonIncome" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tblPersonAddress">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="AddressID" Type="int" Nullable="false" />
+          <Property Name="AddressDescription" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPersonCuisine">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="CuisineID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="CuisineID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPersonFeaturePreferences">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="FeatureID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" />
+        </EntityType>
+        <EntityType Name="tblPersonRelationship">
+          <Key>
+            <PropertyRef Name="MainPersonID" />
+            <PropertyRef Name="SecondPersonID" />
+            <PropertyRef Name="RelationshipTypeID" />
+          </Key>
+          <Property Name="MainPersonID" Type="int" Nullable="false" />
+          <Property Name="SecondPersonID" Type="int" Nullable="false" />
+          <Property Name="RelationshipTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPersonResturantFeatureResturant">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="FeatureID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="ResturantID" Type="int" Nullable="false" />
+          <Property Name="FeatureID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="RATING" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRelationshipsLookUp">
+          <Key>
+            <PropertyRef Name="RelationshipTypeID" />
+          </Key>
+          <Property Name="RelationshipTypeID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblResturant">
+          <Key>
+            <PropertyRef Name="ResturantID" />
+          </Key>
+          <Property Name="ResturantID" Type="int" Nullable="false" />
+          <Property Name="AddressID" Type="int" Nullable="false" />
+          <Property Name="ResturantName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ResturantImagePath" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblResturantFeatures">
+          <Key>
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="ResturantID" Type="int" Nullable="false" />
+          <Property Name="FeatureID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblPerson__Featu__5AEE82B9">
+          <End Role="tblFeatures" Type="Self.tblFeatures" Multiplicity="1" />
+          <End Role="tblPersonFeaturePreferences" Type="Self.tblPersonFeaturePreferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFeatures">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="tblPersonFeaturePreferences">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClassActDBModelStoreContainer">
+          <EntitySet Name="tblAddress" EntityType="Self.tblAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCuisine" EntityType="Self.tblCuisine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCuisineResturant" EntityType="Self.tblCuisineResturant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFeatures" EntityType="Self.tblFeatures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMeal" EntityType="Self.tblMeal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPerson" EntityType="Self.tblPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonAddress" EntityType="Self.tblPersonAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonCuisine" EntityType="Self.tblPersonCuisine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonFeaturePreferences" EntityType="Self.tblPersonFeaturePreferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonRelationship" EntityType="Self.tblPersonRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonResturantFeatureResturant" EntityType="Self.tblPersonResturantFeatureResturant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRelationshipsLookUp" EntityType="Self.tblRelationshipsLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblResturant" EntityType="Self.tblResturant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblResturantFeatures" EntityType="Self.tblResturantFeatures" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblPerson__Featu__5AEE82B9" Association="Self.FK__tblPerson__Featu__5AEE82B9">
+            <End Role="tblFeatures" EntitySet="tblFeatures" />
+            <End Role="tblPersonFeaturePreferences" EntitySet="tblPersonFeaturePreferences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClassActDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityType Name="tblResturant">
+          <Key>
+            <PropertyRef Name="ResturantID" />
+          </Key>
+          <Property Name="ResturantID" Type="Int32" Nullable="false" />
+          <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="ResturantName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResturantImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ClassActDBEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="tblResturants" EntityType="Self.tblResturant" />
+          <EntitySet Name="tblAddresses" EntityType="ClassActDBModel.tblAddress" />
+          <EntitySet Name="tblFeatures" EntityType="ClassActDBModel.tblFeature" />
+          <EntitySet Name="tblPersons" EntityType="ClassActDBModel.tblPerson" />
+          <EntitySet Name="tblPersonAddresses" EntityType="ClassActDBModel.tblPersonAddress" />
+          <EntitySet Name="tblPersonFeaturePreferences" EntityType="ClassActDBModel.tblPersonFeaturePreference" />
+          <EntitySet Name="tblPersonRelationships" EntityType="ClassActDBModel.tblPersonRelationship" />
+          <EntitySet Name="tblPersonResturantFeatureResturants" EntityType="ClassActDBModel.tblPersonResturantFeatureResturant" />
+          <EntitySet Name="tblRelationshipsLookUps" EntityType="ClassActDBModel.tblRelationshipsLookUp" />
+          <EntitySet Name="tblResturantFeatures" EntityType="ClassActDBModel.tblResturantFeature" />
+          <AssociationSet Name="FK__tblPerson__Featu__5AEE82B9" Association="ClassActDBModel.FK__tblPerson__Featu__5AEE82B9">
+            <End Role="tblFeature" EntitySet="tblFeatures" />
+            <End Role="tblPersonFeaturePreference" EntitySet="tblPersonFeaturePreferences" />
+          </AssociationSet>
+          <EntitySet Name="tblCuisines" EntityType="ClassActDBModel.tblCuisine" />
+          <EntitySet Name="tblCuisineResturants" EntityType="ClassActDBModel.tblCuisineResturant" />
+          <EntitySet Name="tblMeals" EntityType="ClassActDBModel.tblMeal" />
+          <EntitySet Name="tblPersonCuisines" EntityType="ClassActDBModel.tblPersonCuisine" />
+        </EntityContainer>
+        <EntityType Name="tblAddress">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblFeature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="Int32" Nullable="false" />
+          <Property Name="FeatureDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPersonFeaturePreferences" Relationship="ClassActDBModel.FK__tblPerson__Featu__5AEE82B9" FromRole="tblFeature" ToRole="tblPersonFeaturePreference" />
+        </EntityType>
+        <EntityType Name="tblPerson">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="PersonsEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonsUserName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonsPassword" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PersonDOB" Type="DateTime" Precision="0" />
+          <Property Name="PersonIncome" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblPersonAddress">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="AddressDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblPersonFeaturePreference">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="FeatureID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" />
+          <NavigationProperty Name="tblFeature" Relationship="ClassActDBModel.FK__tblPerson__Featu__5AEE82B9" FromRole="tblPersonFeaturePreference" ToRole="tblFeature" />
+        </EntityType>
+        <EntityType Name="tblPersonRelationship">
+          <Key>
+            <PropertyRef Name="MainPersonID" />
+            <PropertyRef Name="SecondPersonID" />
+            <PropertyRef Name="RelationshipTypeID" />
+          </Key>
+          <Property Name="MainPersonID" Type="Int32" Nullable="false" />
+          <Property Name="SecondPersonID" Type="Int32" Nullable="false" />
+          <Property Name="RelationshipTypeID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPersonResturantFeatureResturant">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="FeatureID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="ResturantID" Type="Int32" Nullable="false" />
+          <Property Name="FeatureID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RATING" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRelationshipsLookUp">
+          <Key>
+            <PropertyRef Name="RelationshipTypeID" />
+          </Key>
+          <Property Name="RelationshipTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblResturantFeature">
+          <Key>
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="ResturantID" Type="Int32" Nullable="false" />
+          <Property Name="FeatureID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblPerson__Featu__5AEE82B9">
+          <End Type="ClassActDBModel.tblFeature" Role="tblFeature" Multiplicity="1" />
+          <End Type="ClassActDBModel.tblPersonFeaturePreference" Role="tblPersonFeaturePreference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFeature">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="tblPersonFeaturePreference">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblCuisine">
+          <Key>
+            <PropertyRef Name="CuisineID" />
+          </Key>
+          <Property Name="CuisineID" Type="Int32" Nullable="false" />
+          <Property Name="CuisineDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblCuisineResturant">
+          <Key>
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="CuisineID" />
+          </Key>
+          <Property Name="ResturantID" Type="Int32" Nullable="false" />
+          <Property Name="CuisineID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMeal">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="ResturantID" />
+            <PropertyRef Name="CuisineID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="ResturantID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CuisineID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPersonCuisine">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="CuisineID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="CuisineID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClassActDBModelStoreContainer" CdmEntityContainer="ClassActDBEntities">
+          <EntitySetMapping Name="tblResturants">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblResturant">
+              <MappingFragment StoreEntitySet="tblResturant">
+                <ScalarProperty Name="ResturantID" ColumnName="ResturantID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="ResturantName" ColumnName="ResturantName" />
+                <ScalarProperty Name="ResturantImagePath" ColumnName="ResturantImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAddresses">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblAddress">
+              <MappingFragment StoreEntitySet="tblAddress">
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFeatures">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblFeature">
+              <MappingFragment StoreEntitySet="tblFeatures">
+                <ScalarProperty Name="FeatureDescription" ColumnName="FeatureDescription" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersons">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblPerson">
+              <MappingFragment StoreEntitySet="tblPerson">
+                <ScalarProperty Name="PersonIncome" ColumnName="PersonIncome" />
+                <ScalarProperty Name="PersonDOB" ColumnName="PersonDOB" />
+                <ScalarProperty Name="PersonLastName" ColumnName="PersonLastName" />
+                <ScalarProperty Name="PersonFirstName" ColumnName="PersonFirstName" />
+                <ScalarProperty Name="PersonsPassword" ColumnName="PersonsPassword" />
+                <ScalarProperty Name="PersonsUserName" ColumnName="PersonsUserName" />
+                <ScalarProperty Name="PersonsEmail" ColumnName="PersonsEmail" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersonAddresses">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblPersonAddress">
+              <MappingFragment StoreEntitySet="tblPersonAddress">
+                <ScalarProperty Name="AddressDescription" ColumnName="AddressDescription" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersonFeaturePreferences">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblPersonFeaturePreference">
+              <MappingFragment StoreEntitySet="tblPersonFeaturePreferences">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersonRelationships">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblPersonRelationship">
+              <MappingFragment StoreEntitySet="tblPersonRelationship">
+                <ScalarProperty Name="RelationshipTypeID" ColumnName="RelationshipTypeID" />
+                <ScalarProperty Name="SecondPersonID" ColumnName="SecondPersonID" />
+                <ScalarProperty Name="MainPersonID" ColumnName="MainPersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersonResturantFeatureResturants">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblPersonResturantFeatureResturant">
+              <MappingFragment StoreEntitySet="tblPersonResturantFeatureResturant">
+                <ScalarProperty Name="RATING" ColumnName="RATING" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="ResturantID" ColumnName="ResturantID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRelationshipsLookUps">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblRelationshipsLookUp">
+              <MappingFragment StoreEntitySet="tblRelationshipsLookUp">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RelationshipTypeID" ColumnName="RelationshipTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblResturantFeatures">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblResturantFeature">
+              <MappingFragment StoreEntitySet="tblResturantFeatures">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="ResturantID" ColumnName="ResturantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCuisines">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblCuisine">
+              <MappingFragment StoreEntitySet="tblCuisine">
+                <ScalarProperty Name="CuisineDescription" ColumnName="CuisineDescription" />
+                <ScalarProperty Name="CuisineID" ColumnName="CuisineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCuisineResturants">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblCuisineResturant">
+              <MappingFragment StoreEntitySet="tblCuisineResturant">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="CuisineID" ColumnName="CuisineID" />
+                <ScalarProperty Name="ResturantID" ColumnName="ResturantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMeals">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblMeal">
+              <MappingFragment StoreEntitySet="tblMeal">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CuisineID" ColumnName="CuisineID" />
+                <ScalarProperty Name="ResturantID" ColumnName="ResturantID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersonCuisines">
+            <EntityTypeMapping TypeName="ClassActDBModel.tblPersonCuisine">
+              <MappingFragment StoreEntitySet="tblPersonCuisine">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="CuisineID" ColumnName="CuisineID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="true" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams />
+  </edmx:Designer>
+</edmx:Edmx>

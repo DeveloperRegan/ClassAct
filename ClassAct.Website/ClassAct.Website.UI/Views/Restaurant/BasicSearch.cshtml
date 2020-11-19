@@ -1,0 +1,147 @@
+﻿@model ClassAct.Website.UI.ViewModels.CHomePage
+
+@{
+    ViewBag.Title = "BasicSearch";
+    if (Session["person"] != null)
+    {
+        // logged in
+        Layout = "~/Views/Shared/_UserNavLayout_ClassAct.cshtml";
+
+    }
+    else
+    {
+        // not logged in
+        Layout = "~/Views/Shared/_MainNavLayout_White_ClassAct.cshtml";
+    }
+}
+
+<!-- CATEGORY LIST SECTION -->
+<section class="clerfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-xs-12">
+                <div class="resultBar barSpaceAdjust">
+                    <h2>We found <span>@Model.SearchedRestaurants.Count</span> results for you</h2>
+                    @*<ul class="list-inline">
+                            <li><a href="category-list-full.html"><i class="fa fa-th" aria-hidden="true"></i></a></li>
+                            <li class="active"><a href="category-list-left.html"><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
+                        </ul>*@
+                </div>
+                @foreach (var restaurant in Model.SearchedRestaurants)
+                {
+                    <div class="listContent">
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-12">
+                                <div class="categoryImage">
+                                    @if (restaurant.PhotoData != "empty")
+                                    {
+                                        <img src="data:image/jpeg;base64,@restaurant.PhotoData" alt="Restaurant Image" class="img-responsive img-rounded img-restaurant">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Template/Static HTML/img/things/things-1.jpg" alt="Image category" class="img-responsive img-rounded">
+                                    }
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-7 col-xs-12">
+                                <div class="categoryDetails">
+                                    @*<ul class="list-inline rating">
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                        </ul>*@
+                                    <h2><a href="#" style="color: #222222">@restaurant.ResturantName</a> <span class="likeCount"><i class="fa fa-heart-o" aria-hidden="true"></i> 10 k</span></h2>
+                                    <p>@restaurant.Address.StreetAddress<span class="placeName">@restaurant.Address.City</span></p>
+                                    <p>
+                                        Cuisine Types:
+                                        @foreach (var cuisine in restaurant.CusinesServed)
+                                        {
+                                            <span>@cuisine.Description &nbsp;&nbsp;</span>
+                                        }
+                                    </p>
+                                    @*<ul class="list-inline list-tag">
+                                            <li><a href="category-list-full.html">Hotel,</a></li>
+                                            <li><a href="category-list-full.html">Restaurant</a></li>
+                                        </ul>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                @*This area is page navigation for multi-page results.*@
+                @*<div class="paginationCommon blogPagination categoryPagination">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>*@
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="sidebarInner sidebarCategory">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Find More Restaurants</div>
+                        @using (Html.BeginForm("SetSearchParamaters", "Restaurant", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => Model.SelectedCuisine.Description, new { htmlAttributes = new { @class = "form-control autocomplete", placeholder = "Type a cuisine" } })
+                                        <div class="input-group-addon addon-classAct"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.SelectedLocation, new { htmlAttributes = new { @class = "form-control", placeholder = "City, ST" } })
+                                        <div class="input-group-addon addon-classAct"><i class="icon-listy icon-target" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                @*<div class="sidebarInner sidebarCategory">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Related Categories</div>
+                            <div class="panel-body">
+                                <ul class="list-unstyle categoryList">
+                                    <li><a href="#">Fast food</a></li>
+                                    <li><a href="#">Chinese restaurants</a></li>
+                                    <li><a href="#">Creole restaurants</a></li>
+                                    <li><a href="#">Seafood</a></li>
+                                    <li><a href="#">Thai restaurants</a></li>
+                                    <li><a href="#">Street food</a></li>
+                                    <li><a href="#">Japanese restaurants</a></li>
+                                    <li><a href="#">Greek restaurants</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</section>

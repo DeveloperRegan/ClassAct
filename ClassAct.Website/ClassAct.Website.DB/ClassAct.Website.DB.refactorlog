@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="ad069df5-8d3c-4c31-be37-2e81cb05e40c" ChangeDateTime="10/10/2017 20:04:38">
+    <Property Name="ElementName" Value="[dbo].[tblMeetUp].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblMeetUp]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MeetUpID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a269b705-b756-42a4-b0f3-0ed89f85b805" ChangeDateTime="10/10/2017 20:53:14">
+    <Property Name="ElementName" Value="[dbo].[tblMeetUpInvitation].[UserID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblMeetUpInvitation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReciverUserID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e3647199-8a7b-4151-85a6-79757b252beb" ChangeDateTime="11/14/2017 22:47:32">
+    <Property Name="ElementName" Value="[dbo].[tblResturantRating].[date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblResturantRating]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Date" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8024a306-ff6e-4962-a32a-88510d69a029" ChangeDateTime="11/21/2017 21:05:56">
+    <Property Name="ElementName" Value="[dbo].[tblRecommendation].[BatchCount]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblRecommendation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Batch" />
+  </Operation>
+</Operations>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ClassAct.Website.BL.CResturant>
+
+<div id="thubmnailSlider" class="carousel slide smallThumbnailCarousel">
+    <ol class="carousel-indicators">
+        @{
+            int count = 0;
+            foreach (var restaurant in Model)
+            {
+                <li data-target="#thubmnailSlider" data-slide-to="@count" class="active"></li>
+                count++;
+            }
+        }
+        @*<li data-target="#thubmnailSlider" data-slide-to="0" class="active"></li>
+            <li data-target="#thubmnailSlider" data-slide-to="1"></li>
+            <li data-target="#thubmnailSlider" data-slide-to="2"></li>
+            <li data-target="#thubmnailSlider" data-slide-to="3"></li>
+            <li data-target="#thubmnailSlider" data-slide-to="4"></li>*@
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        @{
+            bool setActiveRow = true;
+
+            foreach (var restaurant in Model)
+            {
+                if (setActiveRow)
+                {
+                    <div class="item row active">
+                        <div class="thingsBox2">
+                            <div class="thingsImage">
+                                @if (restaurant.PhotoData != "empty")
+                                {
+                                    <img src="data:image/jpeg;base64,@restaurant.PhotoData" alt="Restaurant Image" class=">
+                                    }
+                                    else
+                                    {
+                                    <img src="~/Template/Static HTML/img/things/things-1.jpg" alt="Image category">
+                                }
+                                <div class="thingsMask">
+                                    @*<ul class="list-inline rating">
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                        </ul>*@
+                                    <a href="#"><h2>@restaurant.ResturantName <i class="fa fa-check-circle" aria-hidden="true"></i></h2></a>
+                                    <p>@restaurant.Address.StreetAddress @restaurant.Address.City, @restaurant.Address.State</p>
+                                </div>
+                            </div>
+                            <div class="thingsCaption ">
+                                <ul class="list-inline captionItem">
+                                    <li><i class="fa fa-heart-o" aria-hidden="true"></i> 10 k</li>
+                                    @*<li><a href="category-list-left.html">Hotel, Restaurant</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="item row">
+                        <div class="thingsBox2">
+                            <div class="thingsImage">
+                                @if (restaurant.PhotoData != "empty")
+                                {
+                                    <img src="data:image/jpeg;base64,@restaurant.PhotoData" alt="Restaurant Image" class=">
+                                    }
+                                    else
+                                    {
+                                    <img src="~/Template/Static HTML/img/things/things-1.jpg" alt="Image category">
+                                }
+                                <div class="thingsMask">
+                                    @*<ul class="list-inline rating">
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                        </ul>*@
+                                    <a href="#"><h2>@restaurant.ResturantName <i class="fa fa-check-circle" aria-hidden="true"></i></h2></a>
+                                    <p>@restaurant.Address.StreetAddress @restaurant.Address.City, @restaurant.Address.State</p>
+                                </div>
+                            </div>
+                            <div class="thingsCaption ">
+                                <ul class="list-inline captionItem">
+                                    <li><i class="fa fa-heart-o" aria-hidden="true"></i> 10 k</li>
+                                    @*<li><a href="category-list-left.html">Hotel, Restaurant</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                setActiveRow = false;
+            }
+        }
+
+    </div>
+    <a class="left carousel-control" href="#thubmnailSlider" data-slide="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+    <a class="right carousel-control" href="#thubmnailSlider" data-slide="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+</div>

@@ -1,0 +1,256 @@
+﻿@model ClassAct.Website.BL.CPerson
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_UserNavLayout_ClassAct.cshtml";
+}
+
+
+
+ <!-- DASHBOARD PROFILE SECTION -->
+<section class="clearfix bg-dark profileSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-xs-12">
+                <div class="dashboardBoxBg mb30">
+                    <div class="profileImage">
+                        <img src="~/Images/user-2.jpg" alt="Image User" class="img-circle">
+                        <div class="file-upload profileImageUpload">
+                            <div class="upload-area">
+                                <input type="file" name="img[]" class="file">
+                                <button class="browse" type="button">Upload a Picture <i class="icon-listy icon-upload"></i></button>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="profileUserInfo bt profileName">
+
+                        <a href="#">Create a Meet UP</a>
+                    </div>*@
+                </div>
+            </div>
+            <div class="col-md-8">
+              @using (Html.BeginForm())
+              {
+                @Html.AntiForgeryToken()
+
+                  //this is ok, Change padding on Razor form controles, update: fixed
+                  <div class="dashboardBoxBg">
+                      <h2>Edit Profile</h2>
+                      <div class="form-horizontal">
+                          <div class="form-group">
+                              @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label " })
+                              <div class="">
+                                  @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                              </div>
+                          </div>
+                              <div class="form-group">
+                                  @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label " })
+                                  <div class="">
+                                      @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                      @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
+                                  <div class="">
+                                      @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control" })
+                                      @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+                                  <div class="">
+                                      @Html.PasswordFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "form-control" })
+                                      @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
+                                  <div class="">
+                                      @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                      @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })
+                                  <div class="">
+                                      @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                      @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label" })
+                                  <div class="">
+                                      @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                                      @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                  </div>
+
+                                 
+                              </div>
+                          <div class="form-group">
+                              <div class="col-md-offset-7 col-md-5">
+                                  @*<input type="submit" value="Create" class="btn btn-primary" />*@
+                                  <button type="submit" class="btn btn-primary btn-block">Submit Changes</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              }
+                </div>
+            </div>
+        </div>
+</section>
+
+    @*<div class="dashboardBoxBg mt30">
+        <div class="profileIntro">
+            <h3>About You</h3>
+            <div class="row">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="firstNameProfile">Fast Name</label>
+                    <input type="text" class="form-control" id="firstNameProfile" placeholder="Jane">
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="lastNameProfile">Last Name</label>
+                    <input type="text" class="form-control" id="lastNameProfile" placeholder="Doe">
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="emailProfile">Email</label>
+                    <input type="text" class="form-control" id="emailProfile" placeholder="Jane@example.com">
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <label for="aboutYou">About You</label>
+                    <textarea class="form-control" rows="5" id="aboutYou" placeholder="About You"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-area mt30">
+        <button class="btn btn-primary" type="button">Save Change</button>
+    </div>
+    <div class="dashboardBoxBg mt30">
+        <div class="profileIntro">
+            <h3>Update password</h3>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" class="form-control" id="currentPassword" placeholder="********">
+                </div>
+                <div class="form-group col-xs-12">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="New Password">
+                </div>
+                <div class="form-group col-xs-12">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                </div>
+                <div class="form-group col-xs-12">
+                    <button class="btn btn-primary" type="button">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+   
+@*<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfirmPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+</div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

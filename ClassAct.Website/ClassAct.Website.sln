@@ -1,0 +1,96 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassAct.Website.BL", "ClassAct.Website.BL\ClassAct.Website.BL.csproj", "{FF4A68F7-709D-4567-ADEA-3D8E11C5298B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassAct.Website.UI", "ClassAct.Website.UI\ClassAct.Website.UI.csproj", "{6EAD67E0-0C35-424A-B00D-C0D1AFE45419}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ClassAct.Website.DB", "ClassAct.Website.DB\ClassAct.Website.DB.sqlproj", "{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassAct.Website.PL", "ClassAct.Website.PL\ClassAct.Website.PL.csproj", "{EC10CBDE-E2DF-4AA8-A42F-16FB9A4A5166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassAct.Website.BL.Test", "ClassAct.Website.BL.Test\ClassAct.Website.BL.Test.csproj", "{EDCEB7B6-4D46-428A-BE9D-D73BAACA5DCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{43B65F01-C15B-422D-BDC5-FF513A52C6F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassAct.WebSite.PL.Test", "ClassAct.WebSite.PL.Test\ClassAct.WebSite.PL.Test.csproj", "{D4D14F7F-1E13-4079-8F1C-7398AD5E941D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassAct.DatabaseAdder", "ClassAct.DatabaseAdder\ClassAct.DatabaseAdder.csproj", "{A64A4401-08EF-4355-B6B5-0FDFC21E05AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF4A68F7-709D-4567-ADEA-3D8E11C5298B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF4A68F7-709D-4567-ADEA-3D8E11C5298B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF4A68F7-709D-4567-ADEA-3D8E11C5298B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF4A68F7-709D-4567-ADEA-3D8E11C5298B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EAD67E0-0C35-424A-B00D-C0D1AFE45419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EAD67E0-0C35-424A-B00D-C0D1AFE45419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EAD67E0-0C35-424A-B00D-C0D1AFE45419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EAD67E0-0C35-424A-B00D-C0D1AFE45419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCA54F0-1D7E-442A-99F7-E54836C5CE52}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EC10CBDE-E2DF-4AA8-A42F-16FB9A4A5166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC10CBDE-E2DF-4AA8-A42F-16FB9A4A5166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC10CBDE-E2DF-4AA8-A42F-16FB9A4A5166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC10CBDE-E2DF-4AA8-A42F-16FB9A4A5166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDCEB7B6-4D46-428A-BE9D-D73BAACA5DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDCEB7B6-4D46-428A-BE9D-D73BAACA5DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDCEB7B6-4D46-428A-BE9D-D73BAACA5DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDCEB7B6-4D46-428A-BE9D-D73BAACA5DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D14F7F-1E13-4079-8F1C-7398AD5E941D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D14F7F-1E13-4079-8F1C-7398AD5E941D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D14F7F-1E13-4079-8F1C-7398AD5E941D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D14F7F-1E13-4079-8F1C-7398AD5E941D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A64A4401-08EF-4355-B6B5-0FDFC21E05AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A64A4401-08EF-4355-B6B5-0FDFC21E05AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A64A4401-08EF-4355-B6B5-0FDFC21E05AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A64A4401-08EF-4355-B6B5-0FDFC21E05AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDCEB7B6-4D46-428A-BE9D-D73BAACA5DCC} = {43B65F01-C15B-422D-BDC5-FF513A52C6F4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B00C1342-C96F-4975-8522-97130BC888FC}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://regandeveloper.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ClassAct.Website.BL\\ClassAct.Website.BL.csproj
+		SccProjectName1 = ClassAct.Website.BL
+		SccLocalPath1 = ClassAct.Website.BL
+		SccProjectUniqueName2 = ClassAct.Website.UI\\ClassAct.Website.UI.csproj
+		SccProjectName2 = ClassAct.Website.UI
+		SccLocalPath2 = ClassAct.Website.UI
+		SccProjectUniqueName3 = ClassAct.Website.DB\\ClassAct.Website.DB.sqlproj
+		SccProjectName3 = ClassAct.Website.DB
+		SccLocalPath3 = ClassAct.Website.DB
+		SccProjectUniqueName4 = ClassAct.Website.PL\\ClassAct.Website.PL.csproj
+		SccProjectName4 = ClassAct.Website.PL
+		SccLocalPath4 = ClassAct.Website.PL
+		SccProjectUniqueName5 = ClassAct.Website.BL.Test\\ClassAct.Website.BL.Test.csproj
+		SccProjectTopLevelParentUniqueName5 = ClassAct.Website.sln
+		SccProjectName5 = ClassAct.Website.BL.Test
+		SccLocalPath5 = ClassAct.Website.BL.Test
+		SccProjectUniqueName6 = ClassAct.WebSite.PL.Test\\ClassAct.WebSite.PL.Test.csproj
+		SccProjectName6 = ClassAct.WebSite.PL.Test
+		SccLocalPath6 = ClassAct.WebSite.PL.Test
+		SccProjectUniqueName7 = ClassAct.DatabaseAdder\\ClassAct.DatabaseAdder.csproj
+		SccProjectName7 = ClassAct.DatabaseAdder
+		SccLocalPath7 = ClassAct.DatabaseAdder
+	EndGlobalSection
+EndGlobal

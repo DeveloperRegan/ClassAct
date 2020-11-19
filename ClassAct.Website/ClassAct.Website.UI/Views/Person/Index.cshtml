@@ -1,0 +1,94 @@
+﻿@model ClassAct.Website.UI.ViewModels.CHomePage
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserNavLayout_ClassAct.cshtml";
+}
+
+<p>@ViewBag.Message</p>
+
+
+@*thai popup code*@
+@{
+    var message = TempData["RegisterSuccess"] ?? string.Empty;
+}
+<script type="text/javascript">
+    var message = '@message';
+    if(message)
+        alert(message);
+</script>
+@{
+    var message2 = TempData["LoggedIn"] ?? string.Empty;
+}
+@**@
+<script type="text/javascript">
+    var message2 = '@message2';
+    if(message2)
+        alert(message2);
+</script>
+
+   <!-- DASHBOARD PROFILE SECTION -->
+<section class="clearfix bg-dark profileSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-xs-12">
+                <div class="dashboardBoxBg mb30">
+                    <div class="profileImage">
+                        <img src="~/Images/user-2.jpg" alt="Image User" class="img-circle">
+                        @*<div class="file-upload profileImageUpload">
+                                <div class="upload-area">
+                                    <input type="file" name="img[]" class="file">
+                                    <button class="browse" type="button">Upload a Picture <i class="icon-listy icon-upload"></i></button>
+                                </div>
+                            </div>*@
+
+                        @*Displays the user name who is signed in.*@
+
+                    </div>
+                    <div class="profileIntro">
+                        <form class="form-horizontal">
+                            <div class="profilecontent">
+                                <h2 class="profilename text-center">@Model.Person.FullName</h2>
+                                <p><strong>Username:&nbsp;</strong>@Model.Person.UserName</p>
+                                <p><strong>Email:&nbsp;</strong>@Model.Person.Email</p>
+                                <p><strong>Birthdate:&nbsp;</strong>@Model.Person.DOB</p>
+                                <button class="btn btn-secondary btn-block" type="button" onclick="location.href='@Url.Action("EditProfile", "Person")'">Edit Profile</button>
+                                <button class="btn btn-primary btn-block" type="button">Update Preferences</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="profileUserInfo bt profileName">
+
+                        <a href="#">Create a Meet UP</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-7 col-xs-12">
+                @*<form>
+                    <div class="dashboardBoxBg">
+                        <div class="profileIntro">
+                            <h2>Your Profile</h2>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form Ipsum available.</p>
+                        </div>
+                    </div>
+                    <button id="showLoginModal" class="btn btn-default navbar-btn" type="button" data-toggle="modal" data-target="#loginModal"> + <span>Login</span> </button>
+                </form>*@
+                <div class="page-header text-center">
+                    <h2>Today's Recommendations <small>Here are some restaurants that you will probably like.</small></h2>
+                </div>
+
+                <div>
+                    @{ Html.RenderAction("Recommendations", "Person");}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+

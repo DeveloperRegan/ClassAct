@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>ClassAct.Website.DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{3cca54f0-1d7e-442a-99f7-e54836c5ce52}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>ClassAct.Website.DB</RootNamespace>
+    <AssemblyName>ClassAct.Website.DB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Post-Deployment" />
+    <Folder Include="Pre-Deployment" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="StoredProcedures\Adds" />
+    <Folder Include="StoredProcedures\Loads" />
+    <Folder Include="StoredProcedures\Updates" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\tblAddress.sql" />
+    <Build Include="Tables\tblResturantFeatures.sql" />
+    <Build Include="Tables\tblResturant.sql" />
+    <Build Include="Tables\tblRelationshipsLookUp.sql" />
+    <Build Include="Tables\tblPersonResturantFeatureResturant.sql" />
+    <Build Include="Tables\tblPersonRelationship.sql" />
+    <Build Include="Tables\tblPersonFeaturePreferences.sql" />
+    <Build Include="Tables\tblPersonCruisine.sql" />
+    <Build Include="Tables\tblPersonAddress.sql" />
+    <Build Include="Tables\tblPerson.sql" />
+    <Build Include="Tables\tblMeal.sql" />
+    <Build Include="Tables\tblFeatures.sql" />
+    <Build Include="Tables\tblCuisineResturant.sql" />
+    <Build Include="Tables\tblCuisine.sql" />
+    <Build Include="Tables\tblMeetUp.sql" />
+    <Build Include="Tables\tblMeetUpInvitation.sql" />
+    <Build Include="StoredProcedures\Adds\spAddCuisineToResturant.sql" />
+    <Build Include="StoredProcedures\Adds\spAddCuisineToUser.sql" />
+    <Build Include="StoredProcedures\Adds\spAddFeatureToREsturstantFeatureTable.sql" />
+    <Build Include="StoredProcedures\Adds\spAddInviteeToMeetUpInviation.sql" />
+    <Build Include="StoredProcedures\Adds\spAddPersonAddress.sql" />
+    <Build Include="StoredProcedures\Adds\spAddResturant.sql" />
+    <Build Include="StoredProcedures\Adds\spCreateMeetUp.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesCuisineExisitInResturantCuisine.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesCuisineExistInPersonCuisineTable.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesFeatureExistInResturantFeatureTable.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadAllRestaurants.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadCuisinesToResturant.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadMeetUpInvitationsByUser.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadRelationshipToUser.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadRestaurantsByCuisineLocation.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadResturantsByCuisine.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadUserAddresses.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadUserCuisines.sql" />
+    <Build Include="StoredProcedures\Updates\spUpdateUserCuisineRating.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesCuisineExist.sql" />
+    <Build Include="StoredProcedures\Adds\spAddCuisineToCuisineTable.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesFeatureExist.sql" />
+    <Build Include="StoredProcedures\Adds\spAddFeaturetoFeatureTable.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesCuisineExistInCuisineResturantbyNAme.sql" />
+    <Build Include="StoredProcedures\Loads\spDoesFeatureByNameExistInResturantFeature.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadRestutrantByLongLat.sql" />
+    <Build Include="StoredProcedures\Adds\spAddCuisineRatingToResturant.sql" />
+    <Build Include="StoredProcedures\Adds\spAddDislikeToResutrantCuisine.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadMealRatingsByUerID.sql" />
+    <Build Include="Tables\tblResturantRating.sql" />
+    <Build Include="Tables\tblRecommendation.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadRatingsByUser.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadUserByUserID.sql" />
+    <Build Include="StoredProcedures\Adds\spAddResturantLike.sql" />
+    <Build Include="StoredProcedures\Adds\spAddResturantDislike.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadResturantsbyCuisineID.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadResturantsbyFeatureID.sql" />
+    <Build Include="StoredProcedures\Adds\spAddRecommendation.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadResturantByFeatureLocation.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadResturantsByLocationFeatureID.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadResturantbyLocationCuisineID.sql" />
+    <Build Include="StoredProcedures\Loads\spLoadRecommendationsByUserIDAndLocationDescription.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Post-Deployment\CuisineDefaultData.sql" />
+    <None Include="Post-Deployment\featureDefaultData.sql" />
+    <None Include="Post-Deployment\addressDefaultData.sql" />
+    <None Include="Post-Deployment\resturantDefaultData.sql" />
+    <None Include="Post-Deployment\PersonDefaultData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ClassAct.Website.DB.refactorlog" />
+  </ItemGroup>
+</Project>

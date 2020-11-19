@@ -1,0 +1,623 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ClassActDB" Class="ClassAct_WebsiteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=classactserver.database.windows.net;Initial Catalog=ClassActDB;User ID=ClassActAmin;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False" SettingsObjectName="ClassAct.Website.PL.Properties.Settings" SettingsPropertyName="ClassActDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblAddress" Member="tblAddresses">
+    <Type Name="tblAddress">
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GooglePlaceID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="tblAddress_tblPersonAddress" Member="tblPersonAddresses" ThisKey="AddressID" OtherKey="AddressID" Type="tblPersonAddress" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCategory" Member="tblCategories">
+    <Type Name="tblCategory">
+      <Column Name="CategoryID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCuisine" Member="tblCuisines">
+    <Type Name="tblCuisine">
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="tblCuisine_tblCuisineResturant" Member="tblCuisineResturants" ThisKey="CuisineID" OtherKey="CuisineID" Type="tblCuisineResturant" />
+      <Association Name="tblCuisine_tblMeal" Member="tblMeals" ThisKey="CuisineID" OtherKey="CuisineID" Type="tblMeal" />
+      <Association Name="tblCuisine_tblPersonCuisine" Member="tblPersonCuisines" ThisKey="CuisineID" OtherKey="CuisineID" Type="tblPersonCuisine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCuisineResturant" Member="tblCuisineResturants">
+    <Type Name="tblCuisineResturant">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="tblCuisine_tblCuisineResturant" Member="tblCuisine" ThisKey="CuisineID" OtherKey="CuisineID" Type="tblCuisine" IsForeignKey="true" />
+      <Association Name="tblResturant_tblCuisineResturant" Member="tblResturant" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblResturant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblFeatures" Member="tblFeatures">
+    <Type Name="tblFeature">
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FeatureDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="tblFeature_tblPersonFeaturePreference" Member="tblPersonFeaturePreferences" ThisKey="FeatureID" OtherKey="FeatureID" Type="tblPersonFeaturePreference" />
+      <Association Name="tblFeature_tblPersonResturantFeatureResturant" Member="tblPersonResturantFeatureResturants" ThisKey="FeatureID" OtherKey="FeatureID" Type="tblPersonResturantFeatureResturant" />
+      <Association Name="tblFeature_tblResturantFeature" Member="tblResturantFeatures" ThisKey="FeatureID" OtherKey="FeatureID" Type="tblResturantFeature" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMeal" Member="tblMeals">
+    <Type Name="tblMeal">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="tblCuisine_tblMeal" Member="tblCuisine" ThisKey="CuisineID" OtherKey="CuisineID" Type="tblCuisine" IsForeignKey="true" />
+      <Association Name="tblPerson_tblMeal" Member="tblPerson" ThisKey="PersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+      <Association Name="tblResturant_tblMeal" Member="tblResturant" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblResturant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMeetUp" Member="tblMeetUps">
+    <Type Name="tblMeetUp">
+      <Column Name="MeetUpID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CreatorID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="startTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="endtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMeetUpInvitation" Member="tblMeetUpInvitations">
+    <Type Name="tblMeetUpInvitation">
+      <Column Name="InviationID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MeetUpID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ReciverUserID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Endtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LikelinessOfAttending" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MeetUpCode" Type="System.String" DbType="VarChar(55) NOT NULL" CanBeNull="false" />
+      <Column Name="IsAttending" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPerson" Member="tblPersons">
+    <Type Name="tblPerson">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PersonsEmail" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonsUserName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonsPassword" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonFirstName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PersonLastName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PersonDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Role" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PersonsSelf" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="tblPerson_tblMeal" Member="tblMeals" ThisKey="PersonID" OtherKey="PersonID" Type="tblMeal" />
+      <Association Name="tblPerson_tblPersonAddress" Member="tblPersonAddresses" ThisKey="PersonID" OtherKey="PersonID" Type="tblPersonAddress" />
+      <Association Name="tblPerson_tblPersonCuisine" Member="tblPersonCuisines" ThisKey="PersonID" OtherKey="PersonID" Type="tblPersonCuisine" />
+      <Association Name="tblPerson_tblPersonFeaturePreference" Member="tblPersonFeaturePreferences" ThisKey="PersonID" OtherKey="PersonID" Type="tblPersonFeaturePreference" />
+      <Association Name="tblPerson_tblPersonRelationship" Member="tblPersonRelationships" ThisKey="PersonID" OtherKey="MainPersonID" Type="tblPersonRelationship" />
+      <Association Name="tblPerson_tblPersonRelationship1" Member="tblPersonRelationships1" ThisKey="PersonID" OtherKey="SecondPersonID" Type="tblPersonRelationship" />
+      <Association Name="tblPerson_tblPersonResturantFeatureResturant" Member="tblPersonResturantFeatureResturants" ThisKey="PersonID" OtherKey="PersonID" Type="tblPersonResturantFeatureResturant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPersonAddress" Member="tblPersonAddresses">
+    <Type Name="tblPersonAddress">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AddressDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="tblAddress_tblPersonAddress" Member="tblAddress" ThisKey="AddressID" OtherKey="AddressID" Type="tblAddress" IsForeignKey="true" />
+      <Association Name="tblPerson_tblPersonAddress" Member="tblPerson" ThisKey="PersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPersonCuisine" Member="tblPersonCuisines">
+    <Type Name="tblPersonCuisine">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="tblCuisine_tblPersonCuisine" Member="tblCuisine" ThisKey="CuisineID" OtherKey="CuisineID" Type="tblCuisine" IsForeignKey="true" />
+      <Association Name="tblPerson_tblPersonCuisine" Member="tblPerson" ThisKey="PersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPersonFeaturePreferences" Member="tblPersonFeaturePreferences">
+    <Type Name="tblPersonFeaturePreference">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="tblFeature_tblPersonFeaturePreference" Member="tblFeature" ThisKey="FeatureID" OtherKey="FeatureID" Type="tblFeature" IsForeignKey="true" />
+      <Association Name="tblPerson_tblPersonFeaturePreference" Member="tblPerson" ThisKey="PersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPersonRelationship" Member="tblPersonRelationships">
+    <Type Name="tblPersonRelationship">
+      <Column Name="MainPersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SecondPersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RelationshipTypeID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tblPerson_tblPersonRelationship" Member="tblPerson" ThisKey="MainPersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+      <Association Name="tblPerson_tblPersonRelationship1" Member="tblPerson1" ThisKey="SecondPersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+      <Association Name="tblRelationshipsLookUp_tblPersonRelationship" Member="tblRelationshipsLookUp" ThisKey="RelationshipTypeID" OtherKey="RelationshipTypeID" Type="tblRelationshipsLookUp" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblPersonResturantFeatureResturant" Member="tblPersonResturantFeatureResturants">
+    <Type Name="tblPersonResturantFeatureResturant">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RATING" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="tblFeature_tblPersonResturantFeatureResturant" Member="tblFeature" ThisKey="FeatureID" OtherKey="FeatureID" Type="tblFeature" IsForeignKey="true" />
+      <Association Name="tblPerson_tblPersonResturantFeatureResturant" Member="tblPerson" ThisKey="PersonID" OtherKey="PersonID" Type="tblPerson" IsForeignKey="true" />
+      <Association Name="tblResturant_tblPersonResturantFeatureResturant" Member="tblResturant" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblResturant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblRecommendation" Member="tblRecommendations">
+    <Type Name="tblRecommendation">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="BatchID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="LocationDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblRelationshipsLookUp" Member="tblRelationshipsLookUps">
+    <Type Name="tblRelationshipsLookUp">
+      <Column Name="RelationshipTypeID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="tblRelationshipsLookUp_tblPersonRelationship" Member="tblPersonRelationships" ThisKey="RelationshipTypeID" OtherKey="RelationshipTypeID" Type="tblPersonRelationship" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblResturant" Member="tblResturants">
+    <Type Name="tblResturant">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantHours" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantWebsite" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="tblResturant_tblCuisineResturant" Member="tblCuisineResturants" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblCuisineResturant" />
+      <Association Name="tblResturant_tblMeal" Member="tblMeals" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblMeal" />
+      <Association Name="tblResturant_tblPersonResturantFeatureResturant" Member="tblPersonResturantFeatureResturants" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblPersonResturantFeatureResturant" />
+      <Association Name="tblResturant_tblResturantFeature" Member="tblResturantFeatures" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblResturantFeature" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblResturantCategory" Member="tblResturantCategories">
+    <Type Name="tblResturantCategory">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="categoryID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblResturantFeatures" Member="tblResturantFeatures">
+    <Type Name="tblResturantFeature">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="tblFeature_tblResturantFeature" Member="tblFeature" ThisKey="FeatureID" OtherKey="FeatureID" Type="tblFeature" IsForeignKey="true" />
+      <Association Name="tblResturant_tblResturantFeature" Member="tblResturant" ThisKey="ResturantID" OtherKey="ResturantID" Type="tblResturant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblResturantRating" Member="tblResturantRatings">
+    <Type Name="tblResturantRating">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.spAddCuisineRatingToResturant" Method="spAddCuisineRatingToResturant">
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="userid" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddCuisineToCuisineTable" Method="spAddCuisineToCuisineTable">
+    <Parameter Name="CuisineDescription" Parameter="cuisineDescription" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddCuisineToResturant" Method="spAddCuisineToResturant">
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="rating" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddCuisineToUser" Method="spAddCuisineToUser">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="rating" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddDislikeToResutrantCuisine" Method="spAddDislikeToResutrantCuisine">
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddFeaturetoFeatureTable" Method="spAddFeaturetoFeatureTable">
+    <Parameter Name="Feature" Parameter="feature" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddFeatureToREsturstantFeatureTable" Method="spAddFeatureToREsturstantFeatureTable">
+    <Parameter Name="FeatureID" Parameter="featureID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddInviteeToMeetUpInviation" Method="spAddInviteeToMeetUpInviation">
+    <Parameter Name="ReciverID" Parameter="reciverID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="MeetUpCode" Parameter="meetUpCode" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddPersonAddress" Method="spAddPersonAddress">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="AddressID" Parameter="addressID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="StreetAddress" Parameter="streetAddress" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="State" Parameter="state" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Zip" Parameter="zip" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(255)" />
+  </Function>
+  <Function Name="dbo.spAddRecommendation" Method="spAddRecommendation">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="LocationDescription" Parameter="locationDescription" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddResturant" Method="spAddResturant">
+    <Parameter Name="ResturantName" Parameter="resturantName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ResturantPhoneNumber" Parameter="resturantPhoneNumber" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="ResturantStreetAddress" Parameter="resturantStreetAddress" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ResturantCity" Parameter="resturantCity" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ResturantState" Parameter="resturantState" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ResturantZip" Parameter="resturantZip" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="AddressID" Parameter="addressID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ResturantImagePath" Parameter="resturantImagePath" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Lat" Parameter="lat" Type="System.Double" DbType="Float" />
+    <Parameter Name="long" Type="System.Double" DbType="Float" />
+    <Parameter Name="website" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="hours" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddResturantDislike" Method="spAddResturantDislike">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddResturantLike" Method="spAddResturantLike">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spCreateMeetUp" Method="spCreateMeetUp">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="MeetUpID" Parameter="meetUpID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="meetupCode" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDoesCuisineExisitInResturantCuisine" Method="spDoesCuisineExisitInResturantCuisine">
+    <Parameter Name="RestID" Parameter="restID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spDoesCuisineExisitInResturantCuisineResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spDoesCuisineExist" Method="spDoesCuisineExist">
+    <Parameter Name="cuisineName" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="spDoesCuisineExistResult">
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spDoesCuisineExistInCuisineResturantbyNAme" Method="spDoesCuisineExistInCuisineResturantbyNAme">
+    <Parameter Name="CuisineName" Parameter="cuisineName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spDoesCuisineExistInCuisineResturantbyNAmeResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spDoesCuisineExistInPersonCuisineTable" Method="spDoesCuisineExistInPersonCuisineTable">
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="PersonID" Parameter="personID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spDoesCuisineExistInPersonCuisineTableResult">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spDoesFeatureByNameExistInResturantFeature" Method="spDoesFeatureByNameExistInResturantFeature">
+    <Parameter Name="FeatureName" Parameter="featureName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spDoesFeatureByNameExistInResturantFeatureResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spDoesFeatureExist" Method="spDoesFeatureExist">
+    <Parameter Name="FeatureDescription" Parameter="featureDescription" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="spDoesFeatureExistResult">
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spDoesFeatureExistInResturantFeatureTable" Method="spDoesFeatureExistInResturantFeatureTable">
+    <Parameter Name="FeatureID" Parameter="featureID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spDoesFeatureExistInResturantFeatureTableResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadAllRestaurants" Method="spLoadAllRestaurants">
+    <ElementType Name="spLoadAllRestaurantsResult">
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadCuisinesToResturant" Method="spLoadCuisinesToResturant">
+    <Parameter Name="ResturantID" Parameter="resturantID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadCuisinesToResturantResult">
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadMealRatingsByUerID" Method="spLoadMealRatingsByUerID">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadMealRatingsByUerIDResult">
+      <Column Name="counts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadMeetUpInvitationsByUser" Method="spLoadMeetUpInvitationsByUser">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadMeetUpInvitationsByUserResult">
+      <Column Name="Description" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MeetUpCode" Type="System.String" DbType="VarChar(55) NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Endtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadRatingsByUser" Method="spLoadRatingsByUser">
+    <Parameter Name="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadRatingsByUserResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadRecommendationsByUserIDAndLocationDescription" Method="spLoadRecommendationsByUserIDAndLocationDescription">
+    <Parameter Name="LocationDescription" Parameter="locationDescription" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadRecommendationsByUserIDAndLocationDescriptionResult">
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadRelationshipToUser" Method="spLoadRelationshipToUser">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadRelationshipToUserResult">
+      <Column Name="PersonFirstName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PersonLastName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PersonsUserName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadRestaurantsByCuisineLocation" Method="spLoadRestaurantsByCuisineLocation">
+    <Parameter Name="Cuisine" Parameter="cuisine" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="State" Parameter="state" Type="System.String" DbType="VarChar(2)" />
+    <ElementType Name="spLoadRestaurantsByCuisineLocationResult">
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadResturantByFeatureLocation" Method="spLoadResturantByFeatureLocation">
+    <Parameter Name="city" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="state" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="FeatureDescription" Parameter="featureDescription" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="spLoadResturantByFeatureLocationResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantHours" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantWebsite" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="AddressID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GooglePlaceID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadResturantbyLocationCuisineID" Method="spLoadResturantbyLocationCuisineID">
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="State" Parameter="state" Type="System.String" DbType="VarChar(2)" />
+    <ElementType Name="spLoadResturantbyLocationCuisineIDResult">
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadResturantsByCuisine" Method="spLoadResturantsByCuisine">
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadResturantsByCuisineResult">
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadResturantsbyCuisineID" Method="spLoadResturantsbyCuisineID">
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadResturantsbyCuisineIDResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantHours" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantWebsite" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadResturantsbyFeatureID" Method="spLoadResturantsbyFeatureID">
+    <Parameter Name="FeatureID" Parameter="featureID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadResturantsbyFeatureIDResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantHours" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantWebsite" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadResturantsByLocationFeatureID" Method="spLoadResturantsByLocationFeatureID">
+    <Parameter Name="city" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="state" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="FeatureID" Parameter="featureID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadResturantsByLocationFeatureIDResult">
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantHours" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantWebsite" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="AddressID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GooglePlaceID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeatureDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadRestutrantByLongLat" Method="spLoadRestutrantByLongLat">
+    <Parameter Name="RestName" Parameter="restName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Latitude" Parameter="latitude" Type="System.Double" DbType="Float" />
+    <Parameter Name="long" Type="System.Double" DbType="Float" />
+    <ElementType Name="spLoadRestutrantByLongLatResult">
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GooglePlaceID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="AddressID1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ResturantImagePath" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantPhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ResturantHours" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ResturantWebsite" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadUserAddresses" Method="spLoadUserAddresses">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadUserAddressesResult">
+      <Column Name="AddressID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="AddressDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadUserByUserID" Method="spLoadUserByUserID">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadUserByUserIDResult">
+      <Column Name="PersonID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PersonsEmail" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonsUserName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonsPassword" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonFirstName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PersonLastName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PersonDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Role" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="PersonsSelf" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLoadUserCuisines" Method="spLoadUserCuisines">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="spLoadUserCuisinesResult">
+      <Column Name="CuisineID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CuisineDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spUpdateUserCuisineRating" Method="spUpdateUserCuisineRating">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="CuisineID" Parameter="cuisineID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NewRating" Parameter="newRating" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
